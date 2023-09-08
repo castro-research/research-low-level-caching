@@ -21,3 +21,4 @@ https://guides.rubyonrails.org/caching_with_rails.html
 
 https://reinteractive.com/articles/rails-low-level-caching-tips
 
+https://www.honeybadger.io/blog/rails-low-level-caching/

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
     include ProductsHelper
+    MEMORY = ActiveSupport::Cache::MemoryStore.new
 
     def index
       @products = Rails.cache.fetch('products', expires_in: 10.minutes) do
@@ -13,7 +14,7 @@ class ProductsController < ApplicationController
     end
 
     def details
-      @product = Rails.cache.fetch("product/#{params[:id]}/details", expires_in: 10.minutes, cache: :mem_cache_store) do
+      @product = MEMORY.fetch("product/#{params[:id]}/details", expires_in: 10.minutes) do
         fake_show_from_db(params[:id])
       end
 

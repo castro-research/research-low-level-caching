@@ -365,19 +365,25 @@ first let's create a route for details:
   get '/products/:id/details', to: 'products#details'
 ```
 
+add this on top of class
+
 ```ruby
-    # TODO: Perform cache in memory
-    def details
-        fake_show_from_db(params[:id])
-    end
+class ProductsController < ApplicationController
+ include ProductsHelper
+ # add this line
+ MEMORY = ActiveSupport::Cache::MemoryStore.new
+
+ .....
 ```
 
-# Did you know?
-
-instead using Rails.cache.fetch, you can use cache_action
+Now, use the memory store
 
 ```ruby
-  cache_action :index, expires_in: 10.minutes
+    def details
+      @product = MEMORY.fetch("product/#{params[:id]}/details", expires_in: 10.minutes) do
+        fake_show_from_db(params[:id])
+      end
+    end
 ```
 
 # References

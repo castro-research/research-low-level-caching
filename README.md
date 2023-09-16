@@ -355,8 +355,6 @@ The products API take: 0.009350 seconds
 
 # Memcache and Redis
 
-WIP - This part is not working yet
-
 If you want to use a single API to store in memory, instead redis you can set this in Fetch
 
 first let's create a route for details:

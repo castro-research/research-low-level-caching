@@ -12,8 +12,10 @@ This is part of Flecto Educa, and we want to share our knowledge with the commun
 
 - Ruby
 - Rails
-- NodeJS
-- Fastify
+- Redis
+- rest-client
+- hiredis
+- Docker
 
 # Example with Rails
 

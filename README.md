@@ -386,6 +386,41 @@ Now, use the memory store
     end
 ```
 
+------
+
+# Improvements
+
+Now, we will let the Controller more clean, and cache the whole request, Instead only the response.
+
+This will be useful, because if you change the params of the request, the cache will be different.
+
+Let's remove the hiredis gem
+
+```ruby
+gem 'hiredis'
+```
+
+and add
+
+```ruby
+gem 'redis-rack-cache'
+```
+
+And change config:
+
+```ruby
+config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
+
+config.action_dispatch.rack_cache = {
+  metastore: "redis://localhost:6379/1/rack_cache_metastore",
+  entitystore: "redis://localhost:6379/1/rack_cache_entitystore"
+}
+```
+
+I also rename current products_controller.rb to products_controller_old.rb
+
+the products_controller.rb will only have the methods.
+
 # References
 
 https://guides.rubyonrails.org/caching_with_rails.html

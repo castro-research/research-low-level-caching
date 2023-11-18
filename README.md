@@ -436,3 +436,5 @@ https://www.honeybadger.io/blog/rails-low-level-caching/
 http://redis-store.org/redis-rails
 
 https://github.com/redis-store/redis-rails
+
+https://github.com/rack/rack-cache

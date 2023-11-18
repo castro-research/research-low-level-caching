@@ -20,14 +20,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # Ignore the find and update, because we are not using a database
-    # @product = Product.find(params[:id])
-    # @product.update(product_params)
-    #
-    # Remove the cache for the updated product
-    Rails.cache.delete("product/#{params[:id]}")
-
-    # Return the updated product
     render json: @product
   end
 end

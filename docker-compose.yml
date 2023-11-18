@@ -5,3 +5,13 @@ services:
     restart: always
     ports:
       - "6379:6379"
+  api:
+    build: ./lowLevelCache
+    command: bundle exec puma -C config/puma.rb
+    restart: always
+    volumes:
+      - ./lowLevelCache:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - cache

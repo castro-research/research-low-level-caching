@@ -53,7 +53,7 @@ Rails.application.configure do
 
   # Add Rack::Cache to your middleware stack.
   config.action_dispatch.rack_cache = {
-    metastore: "redis://localhost:6379/1/rack_cache_metastore",
-    entitystore: "redis://localhost:6379/1/rack_cache_entitystore"
+    metastore: "redis://cache:6379/1/rack_cache_metastore",
+    entitystore: "redis://cache:6379/1/rack_cache_entitystore"
   }
 end

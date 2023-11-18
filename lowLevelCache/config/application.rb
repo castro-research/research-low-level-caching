@@ -22,7 +22,7 @@ module LowLevelCache
     config.action_controller.perform_caching = true
 
     config.cache_store = :redis_cache_store, {
-      url: "redis://localhost:6379/1",
+      url: "redis://cache:6379/1",
       ssl_params: {
         verify_mode: OpenSSL::SSL::VERIFY_NONE
       }

@@ -16,6 +16,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  config.action_dispatch.rack_cache = {
+    metastore: ::Rack::Cache::MetaStore::Redis.new("redis://localhost:6379/0/metastore"),
+    entitystore: ::Rack::Cache::EntityStore::Redis.new("redis://localhost:6379/0/entitystore")
+  }
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true

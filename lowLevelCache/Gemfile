@@ -32,9 +32,9 @@ gem "jbuilder"
 gem 'rest-client'
 # for redis usage
 gem 'redis', '~> 5.0', '>= 5.0.7'
-gem 'hiredis'
-
-
+gem 'redis-rails'
+gem 'redis-rack-cache'
+gem 'rack-cache'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

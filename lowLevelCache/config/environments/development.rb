@@ -55,7 +55,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Add Rack::Cache to your middleware stack.
-  config.cache_store = :redis_cache_store, { url: "redis://localhost:6379/0" }
   config.action_dispatch.rack_cache = {
     metastore: "redis://localhost:6379/1/rack_cache_metastore",
     entitystore: "redis://localhost:6379/1/rack_cache_entitystore"

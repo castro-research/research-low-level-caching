@@ -18,5 +18,11 @@ module LowLevelCache
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.cache_store = :redis_cache_store, {
+      url: "redis://localhost:6379/1",
+      ssl_params: {
+        verify_mode: OpenSSL::SSL::VERIFY_NONE
+      }
+    }
   end
 end

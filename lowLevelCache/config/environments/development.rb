@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "http_cache"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -52,8 +53,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Add Rack::Cache to your middleware stack.
-  config.action_dispatch.rack_cache = {
-    metastore: "redis://cache:6379/1/rack_cache_metastore",
-    entitystore: "redis://cache:6379/1/rack_cache_entitystore"
-  }
+  config.middleware.use HttpCache
 end

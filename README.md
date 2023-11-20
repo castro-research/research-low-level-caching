@@ -396,26 +396,49 @@ This will be useful, because if you change the params of the request, the cache 
 
 Let's remove the hiredis gem
 
-```ruby
-gem 'hiredis'
-```
+We dont need any gem, since Rails v5 support Built-in Cache
 
-and add
+We can see a Redis front of application in lib/http_cache.rb
 
-```ruby
-gem 'redis-rack-cache'
-```
-
-And change config:
+To use it, lets modify the development.rb and add:
 
 ```ruby
-config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
-
-config.action_dispatch.rack_cache = {
-  metastore: "redis://localhost:6379/1/rack_cache_metastore",
-  entitystore: "redis://localhost:6379/1/rack_cache_entitystore"
-}
+require "http_cache"
+config.middleware.use HttpCache
 ```
+
+You can check if is used:
+
+```bash
+➜  lowLevelCache git:(feat/rack-middleware-rails) rake middleware
+....
+use HttpCache
+run LowLevelCache::Application.routes
+```
+
+Now, all request will be cached on front of app:
+
+```bash
+
+==================================================
+Started GET "/products/1" for 127.0.0.1 at 2023-11-20 01:39:38 +0000
+==================================================
+Request method: GET
+Request path: /products/1
+Request params: {}
+Request headers: []
+Cache hit for key: http_cache-GET/products/1{}[]
+Started GET "/products/1" for 127.0.0.1 at 2023-11-20 01:39:39 +0000
+==================================================
+Request method: GET
+Request path: /products/1
+Request params: {}
+Request headers: []
+Cache hit for key: http_cache-GET/products/1{}[]
+```
+
+--------------------
+
 
 I also rename current products_controller.rb to products_controller_old.rb
 

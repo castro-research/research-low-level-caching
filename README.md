@@ -386,6 +386,64 @@ Now, use the memory store
     end
 ```
 
+------
+
+# Improvements
+
+Now, we will let the Controller more clean, and cache the whole request, Instead only the response.
+
+This will be useful, because if you change the params of the request, the cache will be different.
+
+Let's remove the hiredis gem
+
+We dont need any gem, since Rails v5 support Built-in Cache
+
+We can see a Redis front of application in lib/http_cache.rb
+
+To use it, lets modify the development.rb and add:
+
+```ruby
+require "http_cache"
+config.middleware.use HttpCache
+```
+
+You can check if is used:
+
+```bash
+➜  lowLevelCache git:(feat/rack-middleware-rails) rake middleware
+....
+use HttpCache
+run LowLevelCache::Application.routes
+```
+
+Now, all request will be cached on front of app:
+
+```bash
+
+==================================================
+Started GET "/products/1" for 127.0.0.1 at 2023-11-20 01:39:38 +0000
+==================================================
+Request method: GET
+Request path: /products/1
+Request params: {}
+Request headers: []
+Cache hit for key: http_cache-GET/products/1{}[]
+Started GET "/products/1" for 127.0.0.1 at 2023-11-20 01:39:39 +0000
+==================================================
+Request method: GET
+Request path: /products/1
+Request params: {}
+Request headers: []
+Cache hit for key: http_cache-GET/products/1{}[]
+```
+
+--------------------
+
+
+I also rename current products_controller.rb to products_controller_old.rb
+
+the products_controller.rb will only have the methods.
+
 # References
 
 https://guides.rubyonrails.org/caching_with_rails.html
@@ -401,3 +459,5 @@ https://www.honeybadger.io/blog/rails-low-level-caching/
 http://redis-store.org/redis-rails
 
 https://github.com/redis-store/redis-rails
+
+https://github.com/rack/rack-cache
